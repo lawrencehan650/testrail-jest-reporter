@@ -39,7 +39,7 @@ class CustomTestrailReporter {
      * @param  _options - Run configuration
      */
     onRunStart(_results, _options) {
-        if (this._options.project_id && !isNaN(this._options.project_id) && this._options.milestone) {
+        if (this._options.project_id && !isNaN(this._options.project_id)) {
             caller.get_milestone_id();
         }
         else {
