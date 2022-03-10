@@ -39,7 +39,7 @@ class CustomTestrailReporter {
      * @param  _options - Run configuration
      */
     onRunStart(_results, _options) {
-        if (this._options.project_id && !isNaN(this._options.project_id)) {
+        if (this._options.project_id && !isNaN(this._options.project_id) && this._options.milestone) {
             caller.get_milestone_id();
         }
         else {
@@ -67,16 +67,14 @@ class CustomTestrailReporter {
      * @param _aggregatedResult - Results for the test run at the point in time of the test suite being executed
      */
     onTestResult(_test, _testResults, _aggregatedResult) {
-        if (caller._milestone_id) {
-            _testResults.testResults.forEach((result) => {
-                const testcases = this._utils.formatCase(result);
-                if (testcases) {
-                    for (let i=0, len = testcases.length; i<len; i++) {
-                        this.results.push(testcases[i])
-                    }
+        _testResults.testResults.forEach((result) => {
+            const testcases = this._utils.formatCase(result);
+            if (testcases) {
+                for (let i=0, len = testcases.length; i<len; i++) {
+                    this.results.push(testcases[i])
                 }
-            });
-        }
+            }
+        });
     }
 
     /**
