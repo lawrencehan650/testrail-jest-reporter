@@ -68,10 +68,6 @@ function get_milestone_id() {
             const _milestone = res.milestones.filter((milestone) => milestone.name === this._milestone_name);
             if (_milestone && !!_milestone.length) {
                 this._milestone_id = _milestone[0].id;
-            } else {
-                throw new ReporterError(`Can not find milestone with name ${this._milestone_name}!
-                \nNo one tests results will be reported.
-                \nPlease, check the "milestone" param you specified in congif and try again`)
             }
         })
         .catch(e => {
