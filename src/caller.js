@@ -106,10 +106,7 @@ function get_tests() {
                     }
                 }
             }
-            if (this._milestone_id) {
-                return tr_api.get_runs(this._project_id, {is_completed: 0, milestone_id: this._milestone_id});
-            }
-            return false;
+            return tr_api.get_runs(this._project_id, {is_completed: 0, milestone_id: this._milestone_id});
         })
         .catch((err) => {
             console.log(error(err.stack));

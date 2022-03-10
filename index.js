@@ -85,20 +85,18 @@ class CustomTestrailReporter {
      * @param {JestTestRunResult} _results - Results from the test run
      */
     onRunComplete(_contexts, _results) {
-        if (caller._milestone_id) {
-            console.log(message('Testrail Jest Reporter is updating tests results...'));
-            caller.get_tests()
-                .then(() => {
-                    return caller.add_results(this.results)
-                })
-                .then(({tests_count, runs_count}) => {
-                    if (tests_count) console
-                        .log(message(`\nTestrail Jest Reporter updated ${tests_count} tests in ${runs_count} runs.`));
-                })
-                .catch(e => {
-                    console.log(error(`! Testrail Jest Reporter Error !\n${e.stack}`));
-                });
-        }
+        console.log(message('Testrail Jest Reporter is updating tests results...'));
+        caller.get_tests()
+            .then(() => {
+                return caller.add_results(this.results)
+            })
+            .then(({tests_count, runs_count}) => {
+                if (tests_count) console
+                    .log(message(`\nTestrail Jest Reporter updated ${tests_count} tests in ${runs_count} runs.`));
+            })
+            .catch(e => {
+                console.log(error(`! Testrail Jest Reporter Error !\n${e.stack}`));
+            });
     }
 
     getLastError() {
